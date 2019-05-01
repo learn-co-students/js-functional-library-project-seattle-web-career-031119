@@ -108,7 +108,7 @@ const fi = (function() {
     },
 
     uniq: function(arr, isSorted, callback){
-      const result = []
+      let result = []
       if(!isSorted){
         const found = {}
         for(let value of arr){
@@ -119,7 +119,13 @@ const fi = (function() {
           }
         }
       } else {
-
+        result = [...arr]
+        for(let i = 0; i < result.length-1; i++){
+          if(JSON.stringify(result[i]) === JSON.stringify(result[i+1])){
+            result.splice(i+1, 1)
+            i--;
+          }
+        }
       }
       return result
     },
